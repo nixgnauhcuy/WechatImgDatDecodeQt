@@ -1,2 +1,6 @@
 # WechatImgDatDecodeQt
-基于pyqt6的微信.dat解析工具。
+
+## 功能介绍
+
+- WechatImgDatDecodeQt 基于 Pyqt6，用于解析微信图片 .dat，转换为其原始格式（png、jpg 或 gif)。
+
