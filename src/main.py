@@ -73,7 +73,7 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
                         block_data[i] ^= file_decode_num
                     output_file.write(block_data)
         self.updateSignal.emit('Done!')
-        
+        self.statusBar.showMessage('转换完成')
 
 
     def pathPushButtonEvent(self):
@@ -85,12 +85,15 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
             return
         
         self.logPlainTextEdit.clear()
+        self.statusBar.showMessage('开始转换...')
         decode_thread = threading.Thread(target=self.wechatImgDatDecode, args=(self.pathLineEdit.text(),))
         decode_thread.start()
 
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    with open("./main.qss","r") as f:
+        app.setStyleSheet(f.read())
     my_pyqt_form = MyPyQT_Form()
     my_pyqt_form.show()
     sys.exit(app.exec())

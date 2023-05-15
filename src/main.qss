@@ -1,0 +1,105 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  border-style: none;
+  border-image: none;
+  outline: 0;
+}
+
+/* QWidget */
+QWidget {
+  background-color: #19232d;
+  border: 0px solid #455364;
+  padding: 0px;
+  color: #e0e1e3;
+}
+
+QWidget::item:selected {
+  background-color: #346792;
+}
+
+/* QTextEdit */
+QTextEdit {
+  background-color: #19232d;
+  color: #e0e1e3;
+  border-radius: 4px;
+  border: 1px solid #455364;
+}
+
+QTextEdit:focus {
+  border: 1px solid #1a72bb;
+}
+
+QTextEdit:selected {
+  background: #346792;
+  color: #455364;
+}
+
+/* QPlainTextEdit */
+QPlainTextEdit {
+  background-color: #19232d;
+  color: #e0e1e3;
+  border-radius: 4px;
+  border: 1px solid #455364;
+}
+
+QPlainTextEdit:focus {
+  border: 1px solid #1a72bb;
+}
+
+QPlainTextEdit:selected {
+  background: #346792;
+  color: #455364;
+}
+
+/* QPushButton */
+QPushButton {
+  background-color: #455364;
+  color: #e0e1e3;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  border: none;
+}
+
+QPushButton:hover {
+  background-color: #54687a;
+  color: #e0e1e3;
+}
+
+QPushButton:pressed {
+  background-color: #60798b;
+}
+
+QPushButton:selected {
+  background: #60798b;
+  color: #e0e1e3;
+}
+
+/* QLineEdit */
+QLineEdit {
+  background-color: #19232d;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-style: solid;
+  border: 2px solid #455364;
+  border-radius: 4px;
+  color: #e0e1e3;
+}
+
+QLineEdit:hover {
+  border: 1px solid #346792;
+  color: #e0e1e3;
+}
+
+QLineEdit:focus {
+  border: 1px solid #1a72bb;
+}
+
+QLineEdit:selected {
+  background-color: #346792;
+  color: #455364;
+}
