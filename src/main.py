@@ -2,10 +2,13 @@ import sys
 import os
 import binascii
 import threading
+import main_qrc
 
 from Ui_main import Ui_MainWindow
 from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtGui import QIcon
+from PySide6.QtCore import QFile, QIODevice
 
 class MyPyQT_Form(QMainWindow, Ui_MainWindow):
 
@@ -14,6 +17,8 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.setWindowIcon(QIcon(":/icon/main.ico"))
 
         self.png_header_h = 0x89
         self.png_header_l = 0x50
@@ -92,8 +97,12 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    with open("./main.qss","r") as f:
-        app.setStyleSheet(f.read())
+
+    f = QFile(":/qss/main.qss")
+    f.open(QIODevice.ReadOnly)
+    app.setStyleSheet(str(f.readAll(), encoding="utf-8"))
+    f.close()
+
     my_pyqt_form = MyPyQT_Form()
     my_pyqt_form.show()
     sys.exit(app.exec())
