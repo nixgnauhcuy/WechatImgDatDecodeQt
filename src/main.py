@@ -28,8 +28,11 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
         self.gif_header_h = 0x47
         self.gif_header_l = 0x49
 
+        self.oldWechatDecodeFlag = False
+
         self.pattern = re.compile(r'\d{4}-\d{2}')
 
+        self.wechatVersionCheckBox.clicked.connect(self.wechatVersionCheckBoxEvent)
         self.pathPushButton.clicked.connect(self.pathPushButtonEvent)
         self.savePathPushButton.clicked.connect(self.savePathPushButtonEvent)
         self.decodePushButton.clicked.connect(self.decodePushButtonEvent)
@@ -38,6 +41,51 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
     
     def updateUI(self, message):
         self.logPlainTextEdit.appendPlainText(message)
+
+    def oldwechatImgDatDecode(self, img_path, save_path):
+        decode_files_path = []
+        files = os.listdir(img_path)
+        for file in files:
+            if file.endswith('.dat'):
+                decode_files_path.append(img_path + '/' + file)
+
+        for decode_file in decode_files_path:
+            with open(decode_file, 'rb') as dat_file:
+                hex_data = binascii.hexlify(dat_file.read(2)).decode('utf-8')
+                tmp_h = int(hex_data[:2], 16)
+                tmp_l = int(hex_data[2:4], 16)
+
+                file_type = None
+                file_decode_num = None
+                if tmp_h^self.png_header_h == tmp_l^self.png_header_l:
+                    file_type = '.png'
+                    file_decode_num = tmp_h^self.png_header_h
+                elif tmp_h^self.jpg_header_h == tmp_l^self.jpg_header_l:
+                    file_type = '.jpg'
+                    file_decode_num = tmp_h^self.jpg_header_h
+                elif tmp_h^self.gif_header_h == tmp_l^self.gif_header_l:
+                    file_type = '.gif'
+                    file_decode_num = tmp_h^self.gif_header_h
+                else:
+                    continue
+
+                save_file_path = os.path.join(save_path, os.path.basename(decode_file).replace(".dat", file_type))
+                if os.path.exists(save_file_path):
+                    self.updateSignal.emit('已存在，跳过：' + save_file_path)
+                    continue
+                else:
+                    self.updateSignal.emit(save_file_path)
+
+                with open(save_file_path, 'wb') as output_file:
+                    dat_file.seek(0)
+                    file_data = dat_file.read()
+                    block_data = bytearray(file_data)
+                    for i in range(len(block_data)):
+                        block_data[i] ^= file_decode_num
+                    output_file.write(block_data)
+
+        self.updateSignal.emit('Done!')
+        self.statusBar.showMessage('转换完成')
 
 
     def wechatImgDatDecode(self, img_path, save_path):
@@ -92,6 +140,11 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
         self.updateSignal.emit('Done!')
         self.statusBar.showMessage('转换完成')
 
+    def wechatVersionCheckBoxEvent(self):
+        if self.wechatVersionCheckBox.isChecked():
+            self.oldWechatDecodeFlag = True
+        else:
+            self.oldWechatDecodeFlag = False
 
     def pathPushButtonEvent(self):
         _path = QFileDialog.getExistingDirectory(self, '请选择MsgAttach文件夹', './')
@@ -113,8 +166,11 @@ class MyPyQT_Form(QMainWindow, Ui_MainWindow):
         
     
         self.logPlainTextEdit.clear()
-        self.statusBar.showMessage('开始转换...')
-        decode_thread = threading.Thread(target=self.wechatImgDatDecode, args=(self.pathLineEdit.text(), self.savePathLineEdit.text()))
+        self.statusBar.showMessage('转换中...')
+        if self.oldWechatDecodeFlag:
+            decode_thread = threading.Thread(target=self.oldwechatImgDatDecode, args=(self.pathLineEdit.text(), self.savePathLineEdit.text()))
+        else:
+            decode_thread = threading.Thread(target=self.wechatImgDatDecode, args=(self.pathLineEdit.text(), self.savePathLineEdit.text()))
         decode_thread.start()
 
         

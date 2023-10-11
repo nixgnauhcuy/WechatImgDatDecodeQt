@@ -43,9 +43,9 @@
    <widget class="QPushButton" name="decodePushButton">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>120</x>
       <y>100</y>
-      <width>541</width>
+      <width>451</width>
       <height>31</height>
      </rect>
     </property>
@@ -87,6 +87,19 @@
     </property>
     <property name="text">
      <string>保存路径</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="wechatVersionCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>100</y>
+      <width>80</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>旧版微信</string>
     </property>
    </widget>
   </widget>
