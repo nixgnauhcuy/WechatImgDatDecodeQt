@@ -7,9 +7,8 @@ import re
 
 from Ui_main import Ui_MainWindow
 from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
-from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal, QFile, QIODeviceBase
 from PyQt6.QtGui import QIcon
-from PySide6.QtCore import QFile, QIODevice
 
 class MyPyQT_Form(QMainWindow, Ui_MainWindow):
 
@@ -178,7 +177,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     f = QFile(":/qss/main.qss")
-    f.open(QIODevice.ReadOnly)
+    f.open(QIODeviceBase.OpenModeFlag.ReadOnly)
     app.setStyleSheet(str(f.readAll(), encoding="utf-8"))
     f.close()
 
