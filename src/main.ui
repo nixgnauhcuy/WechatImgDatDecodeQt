@@ -6,101 +6,76 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>420</height>
+    <width>633</width>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>WechatImgDatDecode</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="pathLineEdit">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>441</width>
-      <height>32</height>
+      <x>10</x>
+      <y>10</y>
+      <width>611</width>
+      <height>391</height>
      </rect>
     </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pathPushButton">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>20</y>
-      <width>91</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>选择路径</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="decodePushButton">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>100</y>
-      <width>451</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>转换</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="logPlainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>140</y>
-      <width>541</width>
-      <height>241</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="savePathLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>60</y>
-      <width>441</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="savePathPushButton">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>60</y>
-      <width>91</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>保存路径</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="wechatVersionCheckBox">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>80</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>旧版微信</string>
-    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QPushButton" name="decodePushButton">
+       <property name="text">
+        <string>转换</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="savePathPushButton">
+       <property name="text">
+        <string>保存路径</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPlainTextEdit" name="logPlainTextEdit"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLineEdit" name="savePathLineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="pathLineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pathPushButton">
+       <property name="text">
+        <string>选择路径</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>24</number>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout"/>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
